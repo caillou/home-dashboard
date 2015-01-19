@@ -1,27 +1,27 @@
 {
     "sundays": [
         {
-            "label": "karfreitag",
+            "label": "Karfreitag",
             "date": "2015-04-03"
         },
         {
-            "label": "ostermontag",
+            "label": "Ostermontag",
             "date": "2015-04-06"
         },
         {
-            "label": "1.mai",
+            "label": "1. Mai",
             "date": "2015-05-01"
         },
         {
-            "label": "auffahrt",
+            "label": "Auffahrt",
             "date": "2015-05-14"
         },
         {
-            "label": "pfingstmontag",
+            "label": "Pfingstmontag",
             "date": "2015-05-25"
         },
         {
-            "label": "1.august",
+            "label": "1. August",
             "date": "2015-08-01"
         }
     ],

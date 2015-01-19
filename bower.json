@@ -1,0 +1,21 @@
+{
+  "name": "home-dashboard",
+  "version": "0.0.0",
+  "authors": [
+    "Pierre Spring <pierre@nelm.io>"
+  ],
+  "license": "MIT",
+  "private": true,
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "_harp/bower_components/",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "jquery": "~2.1.3",
+    "moment": "~2.9.0"
+  }
+}

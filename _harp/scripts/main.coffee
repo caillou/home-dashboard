@@ -6,8 +6,7 @@ do ->
   #     return false
   #   ).length
 
-  $.getJSON 'data/vbz.json', (vbzData) =>
-
+  getNextConnections = (vbzData) ->
     fiveHoursAgo = moment().subtract(5, 'hours')
     fiveHoursAgoAsAString = fiveHoursAgo.format('YYYY-MM-DD')
 
@@ -31,7 +30,7 @@ do ->
     hourMinus5 = fiveHoursAgo.hour()
     minute = fiveHoursAgo.minute()
 
-    timetables = vbzData.timetables.map (currentValue) =>
+    vbzData.timetables.map (currentValue) =>
 
       leaving = currentValue.leaving[dayIndex].reduce(
         (previousValue, currentValue) =>
@@ -63,16 +62,27 @@ do ->
 
         , []
       )
-
       $.extend {}, currentValue, {leaving}
-    $( =>
+
+  $.getJSON 'data/vbz.json', (vbzData) ->
+
+    loopFunction = () ->
+      timetables = getNextConnections(vbzData)
+      $body = $('body')
+
+      $h1 = $('<h1>')
+      $h1.text moment().format 'HH:mm:ss'
+
+      $body.html($h1)
       timetables.forEach (timetable) =>
         $ul = $('<ul>');
         timetable.leaving.forEach (momentObject) =>
-          # $ul.append $('<li/>').text()
           $ul.append $('<li/>').text(momentObject.fromNow() + ', (' + momentObject.format('HH:mm') + ')')
         $('body').append(
           $('<h1/>').text(timetable.line),
           $ul
         )
-    )
+
+      window.requestAnimationFrame loopFunction
+
+    loopFunction()

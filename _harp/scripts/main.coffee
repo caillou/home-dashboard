@@ -65,14 +65,20 @@ do ->
       $.extend {}, currentValue, {leaving}
 
   $.getJSON 'data/vbz.json', (vbzData) ->
-
+    previousTime = ''
     loopFunction = () ->
       timetables = getNextConnections(vbzData)
       $body = $('body')
 
       $h1 = $('<h1>')
-      $h1.text moment().format 'HH:mm:ss'
 
+      now = moment().format 'HH:mm:ss'
+      if now is previousTime
+        window.requestAnimationFrame loopFunction
+        return
+
+      previousTime = now;
+      $h1.text now
       $body.html($h1)
       timetables.forEach (timetable) =>
         $ul = $('<ul>');

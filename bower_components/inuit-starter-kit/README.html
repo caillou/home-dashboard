@@ -1,0 +1,21 @@
+<h1>inuit-starter-kit</h1>
+<pre><code>$ bower install --save inuit-starter-kit</code></pre>
+<p>Install using npm:</p>
+<pre><code>$ npm install --save inuit-starter-kit</code></pre>
+<p>The <code>inuit-starter-kit</code> simply ties together a few key dependencies that are
+usually the starting point for any new project. The <code>inuit-starter-kit</code>
+specifically contains some inuitcss default variables and mixins, as well as
+<a href="https://twitter.com/necolas">Nicolas Gallagher</a>’s
+<a href="https://github.com/necolas/normalize.css">Normalize.css</a> and global
+<code>box-sizing</code> rules. These must be imported in the following order:</p>
+<pre><code>@import &quot;bower_components/inuit-defaults/settings.defaults&quot;;
+
+@import &quot;bower_components/inuit-functions/tools.functions&quot;;
+@import &quot;bower_components/inuit-mixins/tools.mixins&quot;;
+
+@import &quot;bower_components/inuit-normalize/generic.normalize&quot;;
+@import &quot;bower_components/inuit-box-sizing/generic.box-sizing&quot;;
+
+@import &quot;bower_components/inuit-page/base.page&quot;;</code></pre>
+<p>If you use npm instead of bower, replace all occurrances of <code>bower_components</code>
+with <code>node_modules</code>.</p>

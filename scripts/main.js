@@ -65,28 +65,31 @@
     var loopFunction, previousTime;
     previousTime = '';
     loopFunction = function() {
-      var $body, $h1, now, timetables;
-      timetables = getNextConnections(vbzData);
-      $body = $('body');
-      $h1 = $('<h1>');
+      var $h1, $wrapper, now, timetables;
       now = moment().format('HH:mm:ss');
       if (now === previousTime) {
         window.requestAnimationFrame(loopFunction);
         return;
       }
       previousTime = now;
+      timetables = getNextConnections(vbzData);
+      $wrapper = $('<div class="wrapper"/>');
+      $h1 = $('<h1 class="time">');
       $h1.text(now);
-      $body.html($h1);
+      $wrapper.append($h1);
       timetables.forEach((function(_this) {
         return function(timetable) {
-          var $ul;
-          $ul = $('<ul>');
-          timetable.leaving.forEach(function(momentObject) {
-            return $ul.append($('<li/>').text(momentObject.fromNow() + ', (' + momentObject.format('HH:mm') + ')'));
+          return timetable.leaving.forEach(function(momentObject) {
+            var $media, $mediaBody, $mediaImage;
+            $media = $('<div class="media media--tiny schedule"/>');
+            $mediaImage = $('<div class="media__img schedule__line"/>').addClass("schedule__line--" + timetable.line).text(timetable.line);
+            $mediaBody = $('<div class="media__body schedule__time"/>').text(momentObject.fromNow());
+            $media.append($mediaImage, $mediaBody);
+            return $wrapper.append($media);
           });
-          return $('body').append($('<h1/>').text(timetable.line), $ul);
         };
       })(this));
+      $('body').html($wrapper);
       return window.requestAnimationFrame(loopFunction);
     };
     return loopFunction();
